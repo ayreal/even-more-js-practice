@@ -18,7 +18,11 @@ class CocktailsContainer extends Component {
   }
 
   componentDidMount = () => {
-    this.performFetch();
+    this.performFetch()
+      .then(res => res.json())
+      .then(json =>
+        this.setState({ cocktails: json, currentCocktail: json[0] })
+      );
   };
 
   performFetch = () => {
@@ -26,16 +30,26 @@ class CocktailsContainer extends Component {
     const headers = {
       "Content-Type": "application/json}"
     };
-    fetch(ROUTE, {
+    const results = fetch(ROUTE, {
       headers: headers
-    })
-      .then(res => res.json())
-      .then(json =>
-        this.setState({ cocktails: json, currentCocktail: json[0] })
-      );
+    });
+    return results;
   };
 
-  performPost = () => {};
+  performPost = data => {
+    // debugger;
+    const headers = {
+      Accepts: "application/json",
+      "Content-Type": "application/json"
+    };
+
+    const ROUTE = "http://localhost:3000/api/v1/cocktails";
+    return fetch(ROUTE, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: headers
+    }).then(res => res.json());
+  };
 
   handleSearchTerm = e => {
     this.setState({ searchTerm: e.target.value });

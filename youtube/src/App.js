@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        App
+        <h1>This Is YuTub!</h1>
         <VideoContainer />
       </div>
     );

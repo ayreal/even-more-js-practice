@@ -1,9 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 
-class VideoSearch extends Component {
-  render() {
-    return <div>VideoSearch</div>;
-  }
-}
+const VideoSearch = props => {
+  console.log(props);
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="search"
+        value={props.searchTerm}
+        onChange={props.handleSearch}
+      />
+    </div>
+  );
+};
 
 export default VideoSearch;
